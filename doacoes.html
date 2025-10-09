@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faça uma Doação - ONG Patas com Futuro</title> </head>
+<body>
+    <header>
+        <h1>ONG Patas com Futuro</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="sobre.html">Sobre Nós</a></li>
+                <li><a href="projetos.html">Projetos</a></li>
+                <li><a href="voluntariado.html">Voluntariado</a></li>
+                <li><a href="doacoes.html">Como Doar</a></li>
+                <li><a href="transparencia.html">Transparência</a></li>
+                <li><a href="contato.html">Contato</a></li>
+                <li><a href="blog.html">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+    <section id="chamada-doacao">
+        <h2>Sua doação salva vidas. Literalmente.</h2>
+        <p>Cada centavo que recebemos é investido diretamente no cuidado com nossos animais. Com a sua ajuda, podemos garantir ração, vacinas, medicamentos, castrações e toda a estrutura necessária para que eles tenham uma segunda chance.</p>
+        
+        <h4>Veja para onde vai sua ajuda:</h4>
+        <ul>
+            <li><strong>R$ 20:</strong> Garante um dia de alimentação de qualidade para um cão de porte grande.</li>
+            <li><strong>R$ 50:</strong> Custeia a vacina polivalente e o vermífugo de um filhote resgatado.</li>
+            <li><strong>R$ 120:</strong> Permite a castração de um gato, o método mais eficaz de controle populacional.</li>
+        </ul>
+    </section>
+
+    <section id="formulario-doacao">
+        <h3>Quero Fazer a Diferença!</h3>
+        <form action="#" method="POST">
+            <fieldset>
+                <legend>Valor da Doação</legend>
+
+                <div>
+                    <input type="radio" id="valor_20" name="valor_doacao" value="20">
+                    <label for="valor_20">R$ 20</label>
+                </div>
+                <div>
+                    <input type="radio" id="valor_50" name="valor_doacao" value="50" checked>
+                    <label for="valor_50">R$ 50</label>
+                </div>
+                <div>
+                    <input type="radio" id="valor_100" name="valor_doacao" value="100">
+                    <label for="valor_100">R$ 100</label>
+                </div>
+
+                <div>
+                    <label for="outro_valor">Outro Valor (R$):</label>
+                    <input type="number" id="outro_valor" name="outro_valor" min="5" step="1" placeholder="Ex: 60">
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Seus Dados</legend>
+                <div>
+                    <label for="nome_doador">Seu Nome:</label>
+                    <input type="text" id="nome_doador" name="nome_doador" required>
+                </div>
+                <div>
+                    <label for="email_doador">Seu E-mail:</label>
+                    <input type="email" id="email_doador" name="email_doador" required>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Forma de Pagamento</legend>
+                <div>
+                    <input type="radio" id="pag_pix" name="pagamento" value="pix" checked>
+                    <label for="pag_pix">Pix</label>
+                </div>
+                <div>
+                    <input type="radio" id="pag_cartao" name="pagamento" value="cartao">
+                    <label for="pag_cartao">Cartão de Crédito</label>
+                </div>
+            </fieldset>
+
+            <button type="submit">Realizar Doação</button>
+        </form>
+    </section>
+</main>
+        <footer>
+    <p>&copy; 2025 ONG Patas com Futuro. Todos os direitos reservados.</p>
+
+    <section id="newsletter">
+        <h4>Assine nossa Newsletter</h4>
+        <p>Receba nossas histórias e novidades diretamente no seu e-mail.</p>
+        <form action="#" method="POST">
+            <div>
+                <label for="email_news">Seu melhor e-mail:</label>
+                <input type="email" id="email_news" name="email_news" placeholder="seuemail@exemplo.com" required>
+            </div>
+            <fieldset>
+                <legend>Preferências de Conteúdo:</legend>
+                <div>
+                    <input type="checkbox" id="pref_adocao" name="preferencias" value="adocao">
+                    <label for="pref_adocao">Histórias de Adoção</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="pref_dicas" name="preferencias" value="dicas">
+                    <label for="pref_dicas">Dicas de Cuidado</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="pref_eventos" name="preferencias" value="eventos">
+                    <label for="pref_eventos">Nossos Eventos</label>
+                </div>
+            </fieldset>
+            <button type="submit">Inscrever</button>
+        </form>
+    </section>
+    
+</footer>
+    </footer>
+</body>
+</html>
