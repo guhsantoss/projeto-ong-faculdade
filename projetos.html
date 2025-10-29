@@ -3,113 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nossa História - ONG Patas com Futuro</title> </head>
+    <title>Nossos Projetos - ONG Patas com Futuro</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
 <body>
-     <header>
-        <h1>ONG Patas com Futuro</h1>
-        <nav>
-    <ul>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="projetos.html">Projetos</a></li>
-        <li><a href="cadastro.html">Cadastro de Voluntário</a></li>
-    </ul>
-</nav>
+    <header>
+        <div class="container">
+            <h1>ONG Patas com Futuro</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="projetos.html">Projetos</a></li>
+                    <li><a href="cadastro.html">Cadastro de Voluntário</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
+    <main>
+        <div class="container">
+            <section id="introducao-projetos">
+                <h2>Conheça o Impacto do Seu Apoio</h2>
+                <p>Cada doação e cada hora de voluntariado se transformam em ações concretas que salvam vidas. Veja abaixo os principais pilares do nosso trabalho.</p>
+            </section>
 
-   <main>
-    <section id="introducao-projetos">
-        <h2>Conheça o Impacto do Seu Apoio</h2>
-        <p>Cada doação e cada hora de voluntariado se transformam em ações concretas que salvam vidas. Veja abaixo os principais pilares do nosso trabalho e conheça as histórias de alguns dos nossos resgatados.</p>
-    </section>
-    <section class="projeto-detalhe">
-    <h3>Projeto Resgate e Reabilitação</h3>
-    <p>Nossas equipes atuam diariamente resgatando animais em situações de risco. Após o resgate, eles recebem cuidados veterinários completos, alimentação de qualidade e muito carinho até estarem prontos para um novo lar.</p>
+            <hr>
 
-    <h4>Vídeo Institucional: O Dia a Dia do Resgate</h4>
-    <video controls poster="Imagens/capa-video.jpg" style="width:100%; max-width:600px;">
-        <source src="Videos/resgate-institucional.mp4" type="video/mp4">
-        <source src="Videos/resgate-institucional.mp4" type="video/webm">
-        Seu navegador não suporta o elemento de vídeo.
-    </video>
+            <section class="projeto-detalhe">
+                <h3>Projeto Resgate e Reabilitação</h3>
+                <p>Nossas equipes atuam diariamente resgatando animais em situações de risco. Após o resgate, eles recebem cuidados veterinários completos e alimentação de qualidade.</p>
+                
+                <h4>Vídeo Institucional: O Dia a Dia do Resgate</h4>
+                <video controls poster="imagens/capa-video.jpg" style="width:100%; max-width:600px;">
+                    <source src="videos/resgate-institucional.mp4" type="video/mp4">
+                    <source src="videos/resgate-institucional.webm" type="video/webm">
+                    Seu navegador não suporta o elemento de vídeo.
+                </video>
+                
+                <h4>Depoimento de um Adotante</h4>
+                <audio controls>
+                    <source src="audios/depoimento-joana.mp3" type="audio/mpeg">
+                    <source src="audios/depoimento-joana.ogg" type="audio/ogg">
+                    Seu navegador não suporta o elemento de áudio.
+                </audio>
+            </section>
 
-    <h4>Depoimento de um Adotante</h4>
-    <p>Ouça a história de quem deu um novo lar a um de nossos resgatados:</p>
-    <audio controls>
-        <source src="Audios/depoimento-joana.mp3" type="audio/mpeg">
-        <source src="Audios/depoimento-joana.mp3" type="audio/ogg">
-        Seu navegador não suporta o elemento de áudio.
-    </audio>
-</section>
-<section class="projeto-detalhe">
-    <h3>Feiras de Adoção</h3>
-    <p>Regularmente, organizamos feiras de adoção em parceria com empresas locais. É uma chance incrível para nossa comunidade conhecer os animais e para eles encontrarem uma família para sempre. Veja alguns momentos!</p>
+            <hr>
 
-    <div class="galeria-fotos">
-        
-        <figure>
-            <picture>
-              <source media="(min-width: 800px)" srcset="Imagens/galeria/imagen1.jpg">
-              <source media="(min-width: 450px)" srcset="Imagens/galeria/imagen2.jpg">
-        <img src="Imagens/galeria/imagen3.jpg" alt="Criança sorrindo ao abraçar um filhote de cachorro em uma feira de adoção." loading="lazy">
-        
-            </picture>
-            <figcaption>Momento de pura alegria!</figcaption>
-        </figure>
+            <section class="projeto-detalhe">
+                <h3>Feiras de Adoção</h3>
+                <p>Regularmente, organizamos feiras de adoção. Veja alguns momentos!</p>
+                <div class="galeria-fotos">
+                    <figure>
+                        <img src="imagens/galeria/imagen1.jpg" alt="Cão esperando adoção" loading="lazy">
+                        <figcaption>Esperando por um lar.</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="imagens/galeria/imagen2.png" alt="Gato esperando adoção" loading="lazy">
+                        <figcaption>O olhar doce do Tobias.</figcaption>
+                    </figure>
+                </div>
+            </section>
 
-        <figure>
-            <img src="Imagens/galeria/imagen1.jpg.jpg" alt="Olhos de quem quer achar um papai." loading="lazy">
-            <figcaption>O olhar doce do Tobias.</figcaption>
-        </figure>
+            <hr>
 
-        <figure>
-            <img src="Imagens/galeria/imagen2.jpeg" alt="Cachorro com cara de caçador.Procurando um lar" loading="lazy">
-            <figcaption>Luna e seu sorriso de custoso.</figcaption>
-        </figure>
-
+            <section id="participe">
+                <h2>Gostou dos nossos projetos? Faça parte!</h2>
+                <p>Seu apoio é fundamental para que essas histórias continuem acontecendo.</p>
+                <a href="cadastro.html" class="botao-principal">Seja um Voluntário</a>
+            </section>
         </div>
-</section>
-<hr>
-
-        <section id="participe">
-            <h2>Gostou dos nossos projetos? Faça parte!</h2>
-            <p>Seu apoio é fundamental para que essas histórias continuem acontecendo. Veja como você pode ajudar:</p>
-            <a href="voluntariado.html" class="botao-principal">Seja um Voluntário</a>
-            <a href="doacoes.html" class="botao-secundario">Faça uma Doação</a>
-        </section>
-</main>
-
-        <footer>
-    <p>&copy; 2025 ONG Patas com Futuro. Todos os direitos reservados.</p>
-
-    <section id="newsletter">
-        <h4>Assine nossa Newsletter</h4>
-        <p>Receba nossas histórias e novidades diretamente no seu e-mail.</p>
-        <form action="#" method="POST">
-            <div>
-                <label for="email_news">Seu melhor e-mail:</label>
-                <input type="email" id="email_news" name="email_news" placeholder="seuemail@exemplo.com" required>
-            </div>
-            <fieldset>
-                <legend>Preferências de Conteúdo:</legend>
-                <div>
-                    <input type="checkbox" id="pref_adocao" name="preferencias" value="adocao">
-                    <label for="pref_adocao">Histórias de Adoção</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="pref_dicas" name="preferencias" value="dicas">
-                    <label for="pref_dicas">Dicas de Cuidado</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="pref_eventos" name="preferencias" value="eventos">
-                    <label for="pref_eventos">Nossos Eventos</label>
-                </div>
-            </fieldset>
-            <button type="submit">Inscrever</button>
-        </form>
-    </section>
+    </main>
     
-</footer>
-
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 ONG Patas com Futuro. Todos os direitos reservados.</p>
+            </div>
+    </footer>
 </body>
 </html>

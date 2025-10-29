@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+/* =============================================
+   1. SISTEMA DE DESIGN (VARIÁVEIS GLOBAIS)
+   ============================================= */
+:root {
+    /* 1.1. PALETA DE CORES */
+    /* Cores Primárias e Secundárias */
+    --cor-primaria: #0d6efd;      /* Azul forte para botões e links */
+    --cor-secundaria: #ffc107;   /* Amarelo/Laranja para destaque */
+    
+    /* Cores Neutras */
+    --cor-texto-principal: #212529; /* Cinza bem escuro para textos (não preto puro) */
+    --cor-texto-secundario: #6c757d; /* Cinza médio para textos de apoio */
+    --cor-fundo: #f8f9fa;             /* Cinza bem claro para o fundo */
+    --cor-branco: #ffffff;           /* Branco puro para cards e fundos de seção */
+    --cor-borda: #dee2e6;          /* Cinza claro para bordas */
+
+    /* Cores de Feedback (para alertas, etc. no futuro) */
+    --cor-sucesso: #198754;         /* Verde */
+    --cor-erro: #dc3545;            /* Vermelho */
+
+    /* 1.2. TIPOGRAFIA */
+    --fonte-principal: 'Poppins', sans-serif;
+    
+    /* Tamanhos de Fonte (Hierarquia) */
+    --fonte-tamanho-xxl: 3rem;   /* 48px - Título principal da página */
+    --fonte-tamanho-xl: 2rem;    /* 32px - Títulos de seção */
+    --fonte-tamanho-l: 1.5rem;   /* 24px - Subtítulos */
+    --fonte-tamanho-m: 1rem;     /* 16px - Texto base (parágrafos) */
+    --fonte-tamanho-s: 0.875rem; /* 14px - Textos pequenos, legendas */
+    --fonte-tamanho-xs: 0.75rem; /* 12px - Textos muito pequenos */
+
+    /* 1.3. ESPAÇAMENTO (Baseado em 8px) */
+    --espacamento-xs: 0.5rem;  /* 8px */
+    --espacamento-s: 1rem;     /* 16px */
+    --espacamento-m: 1.5rem;   /* 24px */
+    --espacamento-l: 2rem;     /* 32px */
+    --espacamento-xl: 3rem;    /* 48px */
+    --espacamento-xxl: 4rem;   /* 64px */
+}
+
+/* =============================================
+   2. RESET E ESTILOS GLOBAIS
+   ============================================= */
+
+/* Um "reset" muito importante para o cálculo de tamanhos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    /* Define a base para a unidade 'rem' funcionar bem */
+    font-size: 100%; 
+}
+
+/* Bloco Body CORRETO E UNIFICADO */
+body {
+    font-family: var(--fonte-principal);
+    font-size: var(--fonte-tamanho-m);
+    color: var(--cor-texto-principal);
+    background-color: var(--cor-fundo);
+    line-height: 1.6;
+
+    /* Propriedades do Grid */
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+}
+
+/* =============================================
+   3. LAYOUT GERAL E CONTAINER
+   ============================================= */
+
+.container {
+    width: 90%; /* Ocupa 90% da largura da tela */
+    max-width: 1200px; /* Mas nunca ultrapassa 1200px */
+    margin: 0 auto; /* O truque mágico para centralizar na horizontal */
+}
