@@ -10,6 +10,11 @@
     <header>
         <div class="container">
             <h1>ONG Patas com Futuro</h1>
+            <button class="menu-hamburguer">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <nav>
                 <ul>
                     <li><a href="index.html">Início</a></li>
@@ -34,12 +39,16 @@
                 <p>Nossas equipes atuam diariamente resgatando animais em situações de risco. Após o resgate, eles recebem cuidados veterinários completos e alimentação de qualidade.</p>
                 
                 <h4>Vídeo Institucional: O Dia a Dia do Resgate</h4>
-                <video controls poster="imagens/capa-video.jpg" style="width:100%; max-width:600px;">
-                    <source src="videos/resgate-institucional.mp4" type="video/mp4">
-                    <source src="videos/resgate-institucional.webm" type="video/webm">
-                    Seu navegador não suporta o elemento de vídeo.
-                </video>
-                
+                <div class="video-wrapper">
+                    <div class="video-responsivo">
+                        <video controls poster="imagens/capa-video.jpg">
+                            <source src="videos/resgate-institucional.mp4" type="video/mp4">
+                            <source src="videos/resgate-institucional.webm" type="video/webm">
+                            Seu navegador não suporta o elemento de vídeo.
+                        </video>
+                    </div>
+                </div>
+
                 <h4>Depoimento de um Adotante</h4>
                 <audio controls>
                     <source src="audios/depoimento-joana.mp3" type="audio/mpeg">
@@ -56,11 +65,19 @@
                 <div class="galeria-fotos">
                     <figure>
                         <img src="imagens/galeria/imagen1.jpg" alt="Cão esperando adoção" loading="lazy">
-                        <figcaption>Esperando por um lar.</figcaption>
+                        <figcaption>Esperando por um lar.
+                        <div>
+                            <span class="badge badge-amarelo">Novo Resgaste</span>
+                         </div>
+                        </figcaption>
                     </figure>
                     <figure>
-                        <img src="imagens/galeria/imagen2.png" alt="Gato esperando adoção" loading="lazy">
-                        <figcaption>O olhar doce do Tobias.</figcaption>
+                        <img src="imagens/galeria/imagen2.jpg" alt="Gato esperando adoção" loading="lazy">
+                        <figcaption>O olhar doce do Tobias.
+                            <div>
+                                <span class="badge badge-verde">Pronto para Adoação</span>
+                            </div>
+                        </figcaption>
                     </figure>
                 </div>
             </section>
@@ -70,7 +87,7 @@
             <section id="participe">
                 <h2>Gostou dos nossos projetos? Faça parte!</h2>
                 <p>Seu apoio é fundamental para que essas histórias continuem acontecendo.</p>
-                <a href="cadastro.html" class="botao-principal">Seja um Voluntário</a>
+                <a href="cadastro.html" class="btn btn-primary">Seja um Voluntário</a>
             </section>
         </div>
     </main>
@@ -78,7 +95,17 @@
     <footer>
         <div class="container">
             <p>&copy; 2025 ONG Patas com Futuro. Todos os direitos reservados.</p>
-            </div>
+        </div>
     </footer>
+
+    <script>
+        const menuHamburguer = document.querySelector('.menu-hamburguer');
+        const nav = document.querySelector('header nav');
+
+        menuHamburguer.addEventListener('click', () => {
+            nav.classList.toggle('menu-aberto');
+        });
+    </script>
+
 </body>
 </html>

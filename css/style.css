@@ -79,3 +79,384 @@ body {
     max-width: 1200px; /* Mas nunca ultrapassa 1200px */
     margin: 0 auto; /* O truque mágico para centralizar na horizontal */
 }
+/* =============================================
+   4. COMPONENTES - CABEÇALHO (HEADER)
+   ============================================= */
+
+header {
+    background-color: var(--cor-branco); /* Usando nossa variável de cor branca! */
+    padding: var(--espacamento-s) 0;    /* Espaçamento interno (16px em cima/baixo) */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Sombra sutil para dar profundidade */
+    position: sticky; /* Efeito extra: deixa o menu fixo no topo ao rolar */
+    top: 0;
+    z-index: 10; /* Garante que o menu fique por cima de outros elementos */
+}
+
+/* Agora a mágica do Flexbox! */
+header .container {
+    display: flex; /* Ativa o Flexbox */
+    justify-content: space-between; /* Joga o logo para um lado e o menu para o outro */
+    align-items: center; /* Alinha os itens verticalmente no centro */
+}
+
+header h1 {
+    font-size: var(--fonte-tamanho-l); /* Usando variável de tamanho de fonte (24px) */
+    margin: 0; /* Remove qualquer margem padrão do h1 */
+}
+
+header nav ul {
+    list-style: none; /* Remove as bolinhas da lista */
+    display: flex; /* Coloca os itens do menu um ao lado do outro */
+}
+
+header nav ul li {
+    margin-left: var(--espacamento-m); /* Espaçamento entre os itens do menu (24px) */
+}
+
+header nav a {
+    text-decoration: none; /* Remove o sublinhado dos links */
+    color: var(--cor-texto-principal);
+    font-weight: 600; /* Deixa a fonte um pouco mais forte (semi-bold) */
+    padding: var(--espacamento-xs); /* Pequeno espaçamento para facilitar o clique */
+    transition: color 0.3s ease; /* Efeito suave na mudança de cor */
+}
+
+/* Efeito HOVER: Acontece quando o mouse passa por cima do link */
+header nav a:hover {
+    color: var(--cor-primaria); /* Pinta o link com nosso azul primário! */
+}
+/* =============================================
+   5. COMPONENTES - BOTÕES
+   ============================================= */
+
+/* A "forma" base de todos os nossos botões */
+.btn {
+    display: inline-block; /* Permite que links se comportem como blocos para padding */
+    padding: var(--espacamento-xs) var(--espacamento-m); /* 8px vertical, 24px horizontal */
+    font-family: var(--fonte-principal);
+    font-size: var(--fonte-tamanho-m);
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none; /* Garante que links não tenham sublinhado */
+    cursor: pointer; /* Muda o cursor do mouse para a "mãozinha" */
+    border: 1px solid transparent;
+    border-radius: 6px; /* Cantos levemente arredondados */
+    transition: all 0.2s ease-in-out; /* Transição suave para TODOS os efeitos */
+}
+
+/* Nosso botão principal AZUL */
+.btn-primary {
+    background-color: var(--cor-primaria);
+    color: var(--cor-branco);
+}
+
+/* --- ESTADOS VISUAIS DO BOTÃO PRIMÁRIO --- */
+
+/* :hover -> Quando o mouse passa por cima */
+.btn-primary:hover {
+    background-color: #0b5ed7; /* Um tom de azul um pouco mais escuro */
+}
+
+/* :focus -> Quando o botão é selecionado (com Tab, por ex.). Essencial para acessibilidade! */
+.btn-primary:focus {
+    outline: none; /* Remove a borda padrão feia do navegador */
+    box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.4); /* Cria um "brilho" azulado ao redor */
+}
+
+/* :active -> Quando o botão está sendo pressionado */
+.btn-primary:active {
+    background-color: #0a58ca; /* Um azul ainda mais escuro */
+    transform: translateY(1px); /* Efeito sutil de "pressionar para baixo" */
+}
+/* =============================================
+   6. COMPONENTES - FORMULÁRIOS
+   ============================================= */
+
+/* Espaçamento padrão entre cada campo do formulário (label + input) */
+form div {
+    margin-bottom: var(--espacamento-s); /* 16px de espaço abaixo de cada campo */
+}
+
+form label {
+    display: block; /* Faz a label ocupar uma linha inteira */
+    margin-bottom: var(--espacamento-xs); /* 8px de espaço entre a label e o campo */
+    font-weight: 600;
+}
+
+/* Estilo base para TODOS os campos de texto, email, select, etc. */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+textarea,
+select {
+    width: 100%; /* Faz o campo ocupar toda a largura disponível */
+    padding: var(--espacamento-xs) var(--espacamento-s); /* 8px vertical, 16px horizontal */
+    border: 1px solid var(--cor-borda);
+    border-radius: 6px; /* Mesmos cantos arredondados dos botões */
+    font-family: var(--fonte-principal);
+    font-size: var(--fonte-tamanho-m);
+    transition: all 0.2s ease-in-out;
+}
+
+/* :focus -> "Validação Visual" quando um campo está ATIVO */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="date"]:focus,
+textarea:focus,
+select:focus {
+    outline: none; /* Remove a borda padrão feia */
+    border-color: var(--cor-primaria); /* A borda fica AZUL */
+    box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.25); /* Efeito de "brilho" azulado */
+}
+
+/* Estilizando os grupos de campos */
+fieldset {
+    border: 1px solid var(--cor-borda);
+    border-radius: 6px;
+    padding: var(--espacamento-m); /* 24px de espaçamento interno */
+    margin-bottom: var(--espacamento-m);
+}
+
+legend {
+    font-weight: 700; /* Bold */
+    font-size: var(--fonte-tamanho-l); /* 24px */
+    padding: 0 var(--espacamento-xs); /* Pequeno espaçamento lateral */
+    margin-left: var(--espacamento-s);
+}
+/* =============================================
+   7. COMPONENTES - CARDS
+   ============================================= */
+
+/* O contêiner que segura todos os nossos cards */
+.galeria-fotos {
+    display: flex; /* Ativa o Flexbox */
+    flex-wrap: wrap; /* Permite que os cards quebrem para a próxima linha */
+    gap: var(--espacamento-m); /* Cria um espaço de 24px entre os cards (horizontal e vertical) */
+    margin-top: var(--espacamento-l); /* Espaço acima da galeria */
+}
+
+/* O estilo de cada card individual (a tag <figure>) */
+.galeria-fotos figure {
+    /* Mágica do Flexbox para responsividade: */
+    flex: 1 1 300px; /* Cresce, encolhe, com uma base de 300px de largura */
+    
+    background-color: var(--cor-branco);
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px; /* Cantos um pouco mais arredondados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    overflow: hidden; /* Garante que a imagem não "vaze" dos cantos arredondados */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efeito de hover para o card inteiro */
+.galeria-fotos figure:hover {
+    transform: translateY(-5px); /* Levanta o card sutilmente */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1); /* Aumenta a sombra */
+}
+
+/* Estilizando a imagem dentro do card */
+.galeria-fotos img {
+    width: 100%; /* Faz a imagem ocupar toda a largura do card */
+    display: block; /* Remove espaços extras que a tag <img> às vezes tem */
+    aspect-ratio: 16 / 9; /* Força um formato widescreen (16:9) para todas as imagens */
+    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
+}
+
+/* Estilizando a legenda dentro do card */
+.galeria-fotos figcaption {
+    padding: var(--espacamento-s); /* 16px de espaçamento interno */
+    font-weight: 600;
+}
+/* ... a regra .galeria-fotos figcaption termina aqui ... */
+
+/* Estilo para vídeos responsivos */
+.video-responsivo {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    
+    /* A mágica acontece aqui! Força o formato 16:9 */
+    aspect-ratio: 16 / 9;
+}
+
+.video-responsivo video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Garante que o vídeo preencha o espaço sem distorcer */
+}
+/* ... a regra .video-responsivo video termina aqui ... */
+
+/* A "moldura" que vai controlar o tamanho do nosso vídeo */
+.video-wrapper {
+    max-width: 700px; /* <<-- AQUI ESTÁ A MÁGICA! Defina o tamanho máximo que você quer */
+    margin: 0 auto; /* Centraliza a moldura na página */
+    padding: var(--espacamento-l) 0; /* Adiciona um espaço em cima e embaixo do vídeo */
+}
+/* =============================================
+   8. COMPONENTES - NAVEGAÇÃO RESPONSIVA
+   ============================================= */
+
+.menu-hamburguer {
+    display: none; 
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 20; 
+}
+
+.menu-hamburguer span {
+    width: 100%;
+    height: 3px;
+    background-color: var(--cor-texto-principal);
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+}
+
+@media (max-width: 768px) {
+    
+    .menu-hamburguer {
+        display: flex; /* Em telas pequenas, MOSTRA o hambúrguer */
+    }
+
+    /* ESTILO DO PAINEL DO MENU MOBILE (APLICADO O TEMPO TODO EM TELAS PEQUENAS) */
+    header nav {
+        display: block;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: var(--cor-branco);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        
+        /* COMEÇA ESCONDIDO, mas pronto para animar */
+        transform: translateY(-150%); 
+        transition: transform 0.3s ease-in-out;
+    }
+
+    /* ESTILO DO PAINEL DO MENU MOBILE (QUANDO A CLASSE .menu-aberto É ADICIONADA) */
+    header nav.menu-aberto {
+        transform: translateY(0); /* Faz ele deslizar para a posição visível */
+    }
+
+    /* Ajustes para a lista ficar vertical */
+    header nav ul {
+        flex-direction: column;
+    }
+    header nav ul li {
+        margin: 0;
+        text-align: center;
+        border-bottom: 1px solid var(--cor-borda);
+    }
+    header nav a {
+        display: block;
+        padding: var(--espacamento-m);
+    }
+}
+/* =============================================
+   9. BREAKPOINTS RESPONSIVOS ADICIONAIS
+   ============================================= */
+
+/* Para telas de DESKTOP GRANDES (acima de 1400px) */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1320px; /* Aumenta um pouco a largura do conteúdo */
+    }
+}
+
+/* Para telas de TABLET (abaixo de 992px) */
+@media (max-width: 992px) {
+    /* Ajusta o tamanho da fonte dos títulos principais para não ficarem tão grandes */
+    h2 {
+        font-size: var(--fonte-tamanho-xl);
+    }
+}
+
+/* Para telas de CELULARES GRANDES (abaixo de 576px) */
+@media (max-width: 576px) {
+    /* Diminui ainda mais os títulos */
+    h2 {
+        font-size: var(--fonte-tamanho-l);
+    }
+    legend {
+        font-size: var(--fonte-tamanho-l);
+    }
+
+    /* Reduz o espaçamento do cabeçalho */
+    header {
+        padding: var(--espacamento-xs) 0;
+    }
+}
+
+/* Para telas de CELULARES PEQUENOS (abaixo de 400px) */
+@media (max-width: 400px) {
+    .container {
+        width: 95%; /* Usa mais da tela para o conteúdo não ficar espremido */
+    }
+    
+    header h1 {
+        font-size: var(--fonte-tamanho-m); /* Diminui o nome da ONG */
+    }
+}
+/* =============================================
+   10. COMPONENTES - BADGES E TAGS
+   ============================================= */
+
+/* Estilo base para todas as badges */
+.badge {
+    display: inline-block;
+    padding: 0.35em 0.65em; /* Espaçamento interno para a badge "respirar" */
+    font-size: var(--fonte-tamanho-xs); /* 12px, bem pequeno */
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 10rem; /* Deixa a badge totalmente arredondada */
+}
+
+/* Cor da nossa badge de destaque (amarela) */
+.badge-amarelo {
+    color: var(--cor-texto-principal);
+    background-color: var(--cor-secundaria); /* Nossa variável amarela! */
+}
+
+/* Cor para uma badge de sucesso (verde) */
+.badge-verde {
+    color: var(--cor-branco);
+    background-color: var(--cor-sucesso); /* Nossa variável verde! */
+}
+/* =============================================
+   11. COMPONENTES - ALERTS (MENSAGENS DE FEEDBACK)
+   ============================================= */
+
+/* Estilo base para todos os alertas */
+.alert {
+    padding: var(--espacamento-s); /* 16px de espaçamento interno */
+    margin-bottom: var(--espacamento-m); /* 24px de espaço abaixo */
+    border: 1px solid transparent;
+    border-radius: 6px;
+}
+
+/* Alerta de Sucesso (VERDE) */
+.alert-sucesso {
+    color: var(--cor-branco);
+    background-color: var(--cor-sucesso);
+    border-color: #146c43; /* Um tom de verde um pouco mais escuro para a borda */
+}
+
+/* Alerta de Erro (VERMELHO) */
+.alert-erro {
+    color: var(--cor-branco);
+    background-color: var(--cor-erro);
+    border-color: #b02a37; /* Um tom de vermelho um pouco mais escuro para a borda */
+}
