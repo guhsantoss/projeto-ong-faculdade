@@ -91,12 +91,40 @@
             </section>
         </div>
     </main>
-    
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 ONG Patas com Futuro. Todos os direitos reservados.</p>
-        </div>
-    </footer>
+   <footer>
+    <div class="container">
+        <p>&copy; 2025 ONG Patas com Futuro. Todos os direitos reservados.</p>
+
+        <section id="newsletter">
+            <h4>Assine nossa Newsletter</h4>
+            <p>Receba nossas histórias e novidades diretamente no seu e-mail.</p>
+
+            <form action="#" method="POST">
+                <div>
+                    <label for="email_news">Seu melhor e-mail:</label>
+                    <input type="email" id="email_news" name="email_news" placeholder="seuemail@exemplo.com" required>
+                </div>
+                <fieldset>
+                    <legend>Preferências de Conteúdo:</legend>
+                    <div>
+                        <input type="checkbox" id="pref_adocao" name="preferencias" value="adocao">
+                        <label for="pref_adocao">Histórias de Adoção</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="pref_dicas" name="preferencias" value="dicas">
+                        <label for="pref_dicas">Dicas de Cuidado</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="pref_eventos" name="preferencias" value="eventos">
+                        <label for="pref_eventos">Nossos Eventos</label>
+                    </div>
+                </fieldset>
+
+                <button type="submit" class="btn btn-primary">Inscrever</button>
+            </form>
+        </section>
+    </div>
+</footer>
 
     <script>
         const menuHamburguer = document.querySelector('.menu-hamburguer');
