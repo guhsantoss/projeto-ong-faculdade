@@ -256,6 +256,24 @@ legend {
     padding: 0 var(--espacamento-xs); /* Pequeno espaçamento lateral */
     margin-left: var(--espacamento-s);
 }
+/* Estilo para a mensagem de erro (O TEXTO) */
+.mensagem-erro {
+    color: var(--cor-erro); /* VERMELHO: Cor do texto da mensagem */
+    font-size: var(--fonte-tamanho-s);
+    margin-top: var(--espacamento-xs);
+}
+
+/* Estilo para a borda do campo com erro (O CAMPO ESTÁ INATIVO) */
+input.erro {
+    border-color: var(--cor-erro);
+}
+
+/* Estilo para o FOCO do campo com erro (O CAMPO ESTÁ CLICADO!) */
+input.erro:focus {
+    border-color: var(--cor-erro); /* VENCE a cor azul original */
+    box-shadow: 0 0 0 4px rgba(220, 53, 69, 0.25); /* Dá o brilho VERMELHO */
+}
+
 /* =============================================
    7. COMPONENTES - CARDS
    ============================================= */
