@@ -59,50 +59,56 @@ document.addEventListener('DOMContentLoaded', function() {
      * Ativa a validação personalizada no formulário de voluntário.
      */
     function ativarValidacaoFormulario() {
-        const form = document.querySelector('#form-voluntario');
-        if (!form) return; // Se não achar o formulário, para a execução.
+    const form = document.querySelector('#form-voluntario');
+    if (!form) return; // Se não achar o formulário, para a execução.
 
-        console.log("Validação do formulário ativada!");
+    console.log("Validação do formulário ativada!");
 
-        // Função auxiliar para criar e mostrar a mensagem de erro na tela.
-        function mostrarErro(inputElemento, mensagem) {
-            inputElemento.classList.add('erro'); // Adiciona a classe para a borda vermelha.
-            const divErro = document.createElement('div');
-            divErro.className = 'mensagem-erro';
-            divErro.innerText = mensagem;
-            // Insere a mensagem de erro logo após o campo de input.
-            inputElemento.parentNode.appendChild(divErro);
+    // Função auxiliar para criar e mostrar a mensagem de erro na tela.
+    function mostrarErro(inputElemento, mensagem) {
+        inputElemento.classList.add('erro'); // Adiciona a classe para a borda vermelha.
+        const divErro = document.createElement('div');
+        divErro.className = 'mensagem-erro';
+        divErro.innerText = mensagem;
+        // Insere a mensagem de erro logo após o campo de input.
+        inputElemento.parentNode.appendChild(divErro);
+    }
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault(); // Impede o envio padrão do formulário.
+        
+        let isValid = true; 
+        
+        // 1. Limpa todas as mensagens de erro e classes de erro antigas.
+        form.querySelectorAll('.mensagem-erro').forEach(erro => erro.remove());
+        form.querySelectorAll('.erro').forEach(input => input.classList.remove('erro'));
+
+        // Esconde o alerta de sucesso (caso ele esteja visível)
+        const alertSucesso = document.querySelector('#alert-sucesso');
+        alertSucesso.style.display = 'none';
+
+        // 2. Validação de cada campo.
+        const nome = form.querySelector('#nome');
+        if (nome.value.trim().length < 3) {
+            isValid = false;
+            mostrarErro(nome, 'O nome deve ter no mínimo 3 caracteres.');
+        }
+        
+        const email = form.querySelector('#email');
+        if (!email.value.includes('@') || !email.value.includes('.')) {
+            isValid = false;
+            mostrarErro(email, 'Por favor, insira um e-mail válido.');
         }
 
-        form.addEventListener('submit', (event) => {
-            event.preventDefault(); // Impede o envio padrão do formulário.
+        // 3. Se tudo estiver válido, mostramos o ALERTA VERDE!
+        if (isValid) {
+            // alert('Cadastro enviado com sucesso!'); // <-- REMOVEMOS O ALERTA ANTIGO
             
-            let isValid = true; 
-            
-            // 1. Limpa todas as mensagens de erro e classes de erro antigas.
-            form.querySelectorAll('.mensagem-erro').forEach(erro => erro.remove());
-            form.querySelectorAll('.erro').forEach(input => input.classList.remove('erro'));
-
-            // 2. Validação de cada campo.
-            const nome = form.querySelector('#nome');
-            if (nome.value.trim().length < 3) {
-                isValid = false;
-                mostrarErro(nome, 'O nome deve ter no mínimo 3 caracteres.');
-            }
-            
-            const email = form.querySelector('#email');
-            if (!email.value.includes('@') || !email.value.includes('.')) {
-                isValid = false;
-                mostrarErro(email, 'Por favor, insira um e-mail válido.');
-            }
-
-            // 3. Se tudo estiver válido, mostra um alerta de sucesso e limpa o formulário.
-            if (isValid) {
-                alert('Cadastro enviado com sucesso! Obrigado por se juntar a nós.');
-                form.reset();
-            }
-        });
-    }
+            alertSucesso.style.display = 'block'; // <-- MOSTRAMOS O ALERTA BONITO
+            form.reset(); // Limpa o formulário
+        }
+    });
+}
 
     // =============================================================
     // MOTOR DA SPA (REQUISITO 1)
