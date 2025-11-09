@@ -3,10 +3,36 @@
    ============================================= */
 document.addEventListener('DOMContentLoaded', function() {
     
-    // Seleção de Elementos Globais
     const mainContent = document.querySelector('main .container');
     const menuHamburguer = document.querySelector('.menu-hamburguer');
     const nav = document.querySelector('header nav');
+
+    // =============================================================
+    // NOVO: CONTROLE DO MODO ESCURO (DARK MODE)
+    // =============================================================
+    const themeSwitch = document.querySelector('#checkbox-theme');
+
+    // 1. Verifica se o usuário JÁ TEM uma preferência salva no localStorage
+    const temaSalvo = localStorage.getItem('theme');
+    if (temaSalvo === 'dark') {
+        document.body.classList.add('dark-mode'); // Ativa o modo escuro
+        themeSwitch.checked = true; // Marca o botão interruptor
+    }
+
+    // 2. "Escuta" por cliques no interruptor
+    themeSwitch.addEventListener('change', function() {
+        if (this.checked) {
+            // Se o botão for marcado, liga o modo escuro
+            document.body.classList.add('dark-mode');
+            // Salva a preferência na "memória" do navegador
+            localStorage.setItem('theme', 'dark');
+        } else {
+            // Se for desmarcado, desliga o modo escuro
+            document.body.classList.remove('dark-mode');
+            // Salva a preferência na "memória" do navegador
+            localStorage.setItem('theme', 'light');
+        }
+    });
 
     // =============================================================
     // CONTROLE DO MENU HAMBÚRGUER (Da Entrega 2)

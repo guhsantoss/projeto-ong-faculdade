@@ -3,22 +3,24 @@
 /* =============================================
    1. SISTEMA DE DESIGN (VARIÁVEIS GLOBAIS)
    ============================================= */
+/* 1.1. PALETA DE CORES */
 :root {
-    /* 1.1. PALETA DE CORES */
-    /* Cores Primárias e Secundárias */
-    --cor-primaria: #0d6efd;      /* Azul forte para botões e links */
-    --cor-secundaria: #ffc107;   /* Amarelo/Laranja para destaque */
-    
-    /* Cores Neutras */
-    --cor-texto-principal: #212529; /* Cinza bem escuro para textos (não preto puro) */
-    --cor-texto-secundario: #6c757d; /* Cinza médio para textos de apoio */
-    --cor-fundo: #f8f9fa;             /* Cinza bem claro para o fundo */
-    --cor-branco: #ffffff;           /* Branco puro para cards e fundos de seção */
-    --cor-borda: #dee2e6;          /* Cinza claro para bordas */
+    /* Cores Fixas (Não mudam com o tema) */
+    --cor-primaria: #0d6efd;
+    --cor-secundaria: #ffc107;
+    --cor-sucesso: #198754;
+    --cor-erro: #dc3545;
+    --cor-branco-puro: #ffffff;
+    --cor-preto-puro: #000000;
 
-    /* Cores de Feedback (para alertas, etc. no futuro) */
-    --cor-sucesso: #198754;         /* Verde */
-    --cor-erro: #dc3545;            /* Vermelho */
+    /* Cores do Tema (Variáveis que vão mudar) */
+    /* Por padrão, definimos o tema claro */
+    --cor-fundo: #f8f9fa;             /* Fundo claro */
+    --cor-fundo-componente: #ffffff;  /* Cards e header claros */
+    --cor-texto-principal: #212529; /* Texto escuro */
+    --cor-texto-secundario: #6c757d; /* Texto cinza */
+    --cor-borda: #dee2e6;          /* Borda clara */
+
 
     /* 1.2. TIPOGRAFIA */
     --fonte-principal: 'Poppins', sans-serif;
@@ -115,7 +117,7 @@ body {
    ============================================= */
 
 header {
-    background-color: var(--cor-branco); /* Usando nossa variável de cor branca! */
+    background-color: var(--cor-fundo-componente);
     padding: var(--espacamento-s) 0;    /* Espaçamento interno (16px em cima/baixo) */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Sombra sutil para dar profundidade */
     position: sticky; /* Efeito extra: deixa o menu fixo no topo ao rolar */
@@ -290,7 +292,7 @@ input.erro:focus {
 .galeria-fotos figure {
     /* Mágica do Flexbox para responsividade: */
    
-    background-color: var(--cor-branco);
+    background-color: var(--cor-fundo-componente);
     border: 1px solid var(--cor-borda);
     border-radius: 8px; /* Cantos um pouco mais arredondados */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
@@ -507,4 +509,75 @@ input.erro:focus {
     color: var(--cor-branco);
     background-color: var(--cor-erro);
     border-color: #b02a37; /* Um tom de vermelho um pouco mais escuro para a borda */
+}
+/* =============================================
+   12. ACESSIBILIDADE - MODO ESCURO (DARK MODE)
+   ============================================= */
+
+/* 1. Estilização do Botão "Interruptor" */
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+    margin-left: var(--espacamento-m); /* Espaço para separar do menu */
+}
+
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px; /* Largura do interruptor */
+    height: 24px; /* Altura do interruptor */
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc; /* Cor do interruptor desligado */
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px; /* Tamanho da bolinha */
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: var(--cor-primaria); /* Cor do interruptor ligado (Azul) */
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px); /* Move a bolinha para a direita */
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* 2. A Lógica do Modo Escuro */
+/* Quando o <body> tiver a classe .dark-mode, estas regras serão ativadas */
+body.dark-mode {
+    --cor-fundo: #121212;             /* Fundo preto */
+    --cor-fundo-componente: #1e1e1e;  /* Cards e header cinza escuro */
+    --cor-texto-principal: #f8f9fa; /* Texto claro */
+    --cor-texto-secundario: #adb5bd; /* Texto cinza claro */
+    --cor-borda: #495057;          /* Borda escura */
 }
