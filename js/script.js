@@ -1,34 +1,42 @@
-/* =============================================
-   1. MOTOR PRINCIPAL DO SITE (SPA, MENU, VALIDAÇÃO)
-   ============================================= */
 document.addEventListener('DOMContentLoaded', function() {
     
-    // Seleção de Elementos Globais
+    // 1. SELEÇÃO DE ELEMENTOS FUNDAMENTAIS
     const mainContent = document.querySelector('main .container');
     const menuHamburguer = document.querySelector('.menu-hamburguer');
     const nav = document.querySelector('header nav');
+    const themeSwitch = document.querySelector('#checkbox-theme');
 
     // =============================================================
-    // CONTROLE DO MENU HAMBÚRGUER (Da Entrega 2)
+    // 2. CONTROLE DO MODO ESCURO
     // =============================================================
-    if (menuHamburguer && nav) {
-        menuHamburguer.addEventListener('click', () => {
-            nav.classList.toggle('menu-aberto');
+    if (themeSwitch) {
+        const temaSalvo = localStorage.getItem('theme');
+        if (temaSalvo === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeSwitch.checked = true;
+        }
+
+        themeSwitch.addEventListener('change', function() {
+            if (this.checked) {
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('theme', 'light');
+            }
         });
     }
 
     // =============================================================
-    // FUNÇÕES DE ATIVAÇÃO E VALIDAÇÃO (Requisito 3)
+    // 3. FUNÇÕES DE ATIVAÇÃO E VALIDAÇÃO (REQUISITO 3)
     // =============================================================
 
-    /**
-     * Ativa as máscaras de input para CPF, Telefone e CEP.
-     */
     function ativarMascaras() {
         const inputCpf = document.querySelector('#cpf');
         const inputTel = document.querySelector('#telefone');
         const inputCep = document.querySelector('#cep');
 
+        // Lógica das máscaras
         if (inputCpf) {
             inputCpf.addEventListener('input', (e) => {
                 let value = e.target.value.replace(/\D/g, '');
@@ -49,124 +57,123 @@ document.addEventListener('DOMContentLoaded', function() {
         if (inputCep) {
             inputCep.addEventListener('input', (e) => {
                 let value = e.target.value.replace(/\D/g, '');
-                value = value.replace(/^(\d{5})(\d)/, '$1-$2');
+                value = value.replace(/^(\d{5})(\d)/g, '$1-$2');
                 e.target.value = value;
             });
         }
     }
-    
-    /**
-     * Ativa a validação personalizada no formulário de voluntário.
-     */
+
     function ativarValidacaoFormulario() {
-    const form = document.querySelector('#form-voluntario');
-    if (!form) return; // Se não achar o formulário, para a execução.
+        const form = document.querySelector('#form-voluntario');
+        const alertSucesso = document.querySelector('#alert-sucesso');
+        if (!form) return;
 
-    console.log("Validação do formulário ativada!");
+        // Função auxiliar para criar e mostrar a mensagem de erro na tela.
+        function mostrarErro(inputElemento, mensagem) {
+            inputElemento.classList.add('erro'); 
+            const divErro = document.createElement('div');
+            divErro.className = 'mensagem-erro';
+            divErro.innerText = mensagem;
+            inputElemento.parentNode.appendChild(divErro);
+        }
 
-    // Função auxiliar para criar e mostrar a mensagem de erro na tela.
-    function mostrarErro(inputElemento, mensagem) {
-        inputElemento.classList.add('erro'); // Adiciona a classe para a borda vermelha.
-        const divErro = document.createElement('div');
-        divErro.className = 'mensagem-erro';
-        divErro.innerText = mensagem;
-        // Insere a mensagem de erro logo após o campo de input.
-        inputElemento.parentNode.appendChild(divErro);
+        form.addEventListener('submit', (event) => {
+            event.preventDefault(); 
+            let isValid = true; 
+            
+            // 1. Limpa todas as mensagens de erro e classes de erro antigas.
+            form.querySelectorAll('.mensagem-erro').forEach(erro => erro.remove());
+            form.querySelectorAll('.erro').forEach(input => input.classList.remove('erro'));
+            alertSucesso.style.display = 'none';
+
+            // 2. Validação de Nome e Email (Requisito de Consistência)
+            const nome = form.querySelector('#nome');
+            if (nome.value.trim().length < 3) {
+                isValid = false;
+                mostrarErro(nome, 'O nome deve ter no mínimo 3 caracteres.');
+            }
+            
+            const email = form.querySelector('#email');
+            if (!email.value.includes('@') || !email.value.includes('.')) {
+                isValid = false;
+                mostrarErro(email, 'Por favor, insira um e-mail válido.');
+            }
+
+            // 3. Sucesso
+            if (isValid) {
+                alertSucesso.style.display = 'block';
+                form.reset();
+            }
+        });
     }
 
-    form.addEventListener('submit', (event) => {
-        event.preventDefault(); // Impede o envio padrão do formulário.
-        
-        let isValid = true; 
-        
-        // 1. Limpa todas as mensagens de erro e classes de erro antigas.
-        form.querySelectorAll('.mensagem-erro').forEach(erro => erro.remove());
-        form.querySelectorAll('.erro').forEach(input => input.classList.remove('erro'));
-
-        // Esconde o alerta de sucesso (caso ele esteja visível)
-        const alertSucesso = document.querySelector('#alert-sucesso');
-        alertSucesso.style.display = 'none';
-
-        // 2. Validação de cada campo.
-        const nome = form.querySelector('#nome');
-        if (nome.value.trim().length < 3) {
-            isValid = false;
-            mostrarErro(nome, 'O nome deve ter no mínimo 3 caracteres.');
-        }
-        
-        const email = form.querySelector('#email');
-        if (!email.value.includes('@') || !email.value.includes('.')) {
-            isValid = false;
-            mostrarErro(email, 'Por favor, insira um e-mail válido.');
-        }
-
-        // 3. Se tudo estiver válido, mostramos o ALERTA VERDE!
-        if (isValid) {
-            // alert('Cadastro enviado com sucesso!'); // <-- REMOVEMOS O ALERTA ANTIGO
-            
-            alertSucesso.style.display = 'block'; // <-- MOSTRAMOS O ALERTA BONITO
-            form.reset(); // Limpa o formulário
-        }
-    });
-}
-
     // =============================================================
-    // MOTOR DA SPA (REQUISITO 1)
+    // 4. MOTOR DA SPA
     // =============================================================
 
-    /**
-     * Função principal que carrega o conteúdo dinamicamente.
-     */
     function carregarConteudo(href) {
         if (href.includes('projetos.html')) {
             mainContent.innerHTML = templateProjetos();
-            console.log('SPA: Carregando template de Projetos...');
+            ativarMascaras(); // Garante que as máscaras funcionam se o usuário voltar para o cadastro
+            ativarValidacaoFormulario(); 
         } else if (href.includes('cadastro.html')) {
             mainContent.innerHTML = templateCadastro();
-            console.log('SPA: Carregando template de Cadastro...');
-            // ATIVA AS FUNCIONALIDADES APÓS O CONTEÚDO SER INJETADO
             ativarMascaras();
             ativarValidacaoFormulario(); 
-        } 
-        // Se for index.html, não fazemos nada, pois o clique não é interceptado.
+        } else if (href.includes('index.html')) {
+            mainContent.innerHTML = templateHome();
+        }
     }
 
-    // Configura os "escutadores" de clique nos links do menu.
+    // Configura os "escutadores" de clique nos links.
     const navLinks = document.querySelectorAll('header nav a');
     navLinks.forEach(link => {
         link.addEventListener('click', function(event) {
-            
-            const href = this.getAttribute('href');
-
-            // Se o link for o "Início", DEIXA O NAVEGADOR RECARREGAR.
-            if (href.includes('index.html')) {
-                console.log('Navegando para a Home (recarregamento padrão)...');
-                return; // Para a execução aqui e deixa o link funcionar.
-            }
-            
-            // Se o link NÃO FOR o "Início" (ou seja, for Projetos ou Cadastro):
-            
-            // 1. IMPEDE o navegador de recarregar a página.
             event.preventDefault();
-            
-            // 2. Fecha o menu hambúrguer (se estiver aberto)
+            const href = event.target.getAttribute('href');
+
             if (nav.classList.contains('menu-aberto')) {
                 nav.classList.remove('menu-aberto');
             }
             
-            // 3. CHAMA A FUNÇÃO PARA CARREGAR O CONTEÚDO
             carregarConteudo(href);
         });
     });
 
+    // Inicializa a Home na primeira visita
+    carregarConteudo('index.html');
 });
 
-/* =============================================
-   SISTEMA DE TEMPLATES (REQUISITO 2)
-   ============================================= */
+// =============================================================
+// SISTEMA DE TEMPLATES (REQUISITO 2)
+// =============================================================
 
-// Template para a página de Projetos
-function templateProjetos() {
+const templateHome = function() {
+    return `
+        <section id="inicio">
+            <h2>Resgatando vidas, criando futuros.</h2>
+            <p>Somos a Patas com Futuro, uma organização dedicada ao resgate, cuidado e adoção de animais em situação de risco. Cada vida que salvamos é uma história de esperança.</p>
+        </section>
+        <hr>
+        <section id="sobre-nos">
+            <h2>Nossa História: Uma Jornada de Amor e Resgate</h2>
+            <p>A ONG Patas com Futuro nasceu em 2015 do sonho de um pequeno grupo de amigos que não podiam mais ignorar o sofrimento dos animais de rua em nossa cidade. Hoje, contamos com uma rede de voluntários e parceiros dedicados, mas a paixão que nos moveu no primeiro dia permanece a mesma: dar uma segunda chance a quem mais precisa.</p>
+            <figure>
+                <img src="imagens/fundacao-ong.jpg" alt="Foto antiga do primeiro grupo de voluntários com alguns cães resgatados." loading="lazy">
+                <figcaption>Nossos fundadores em 2015, no início de tudo.</figcaption>
+            </figure>
+        </section>
+        <hr>
+        <section id="contato">
+            <h2>Entre em Contato Conosco</h2>
+            <p><strong>Telefone / WhatsApp:</strong> (11) 98765-4321</p>
+            <p><strong>E-mail:</strong> contato@patascomfuturo.org</p>
+            <p><strong>Endereço:</strong> Rua dos Vira-Latas Felizes, 123, Cidade Animalia - SP</p>
+        </section> 
+    `;
+};
+
+const templateProjetos = function() {
     return `
         <section id="introducao-projetos">
             <h2>Conheça o Impacto do Seu Apoio</h2>
@@ -221,9 +228,8 @@ function templateProjetos() {
             <a href="cadastro.html" class="btn btn-primary">Seja um Voluntário</a>
         </section>
     `;
-}
+};
 
-// Template para a página de Cadastro
 function templateCadastro() {
     return `
         <section id="formulario-voluntariado">
@@ -232,7 +238,6 @@ function templateCadastro() {
             </div>
             <h2>Formulário de Cadastro de Voluntário</h2>
             <p>Preencha os campos abaixo para fazer parte da nossa equipe. Entraremos em contato em breve!</p>
-            
             <form action="#" method="POST" id="form-voluntario" novalidate>
                 <fieldset>
                     <legend>Dados Pessoais</legend>
