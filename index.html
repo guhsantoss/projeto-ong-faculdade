@@ -10,18 +10,21 @@
     <header>
         <div class="container">
             <h1>ONG Patas com Futuro</h1>
-           
+            
             <div class="theme-switch-wrapper">
-        <label class="theme-switch" for="checkbox-theme">
-            <input type="checkbox" id="checkbox-theme" aria-label="Ativar ou desativar modo escuro" />
-            <div class="slider round"></div>
-        </label>
-    </div>
-           <button class="menu-hamburguer" aria-label="Abrir ou fechar menu de navegação"></button>
+                <span>Modo Escuro</span>
+                <label class="theme-switch" for="checkbox-theme">
+                    <input type="checkbox" id="checkbox-theme" aria-label="Ativar ou desativar modo escuro" />
+                    <div class="slider round"></div>
+                </label>
+            </div>
+
+            <button class="menu-hamburguer" aria-label="Abrir ou fechar menu de navegação">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
+            
             <nav>
                 <ul>
                     <li><a href="index.html">Início</a></li>
@@ -31,7 +34,8 @@
             </nav>
         </div>
     </header>
-<main>
+
+    <main>
         <div class="container">
             <section id="inicio">
                 <h2>Resgatando vidas, criando futuros.</h2>
@@ -58,11 +62,11 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 ONG Patas com Futuro. Todos os direitos reservados.</p>
+            
             <section id="newsletter">
                 <h4>Assine nossa Newsletter</h4>
                 <p>Receba nossas histórias e novidades diretamente no seu e-mail.</p>
-                <form action="#" method="POST">
+                <form action="#" method="POST" novalidate>
                     <div>
                         <label for="email_news">Seu melhor e-mail:</label>
                         <input type="email" id="email_news" name="email_news" placeholder="seuemail@exemplo.com" required>
@@ -74,6 +78,7 @@
                         <div><input type="checkbox" id="pref_eventos" name="preferencias" value="eventos"><label for="pref_eventos">Nossos Eventos</label></div>
                     </fieldset>
                     <button type="submit" class="btn btn-primary">Inscrever</button>
+                    <p>© 2025 ONG Patas com Futuro. Todos os direitos reservados.</p>
                 </form>
             </section>
         </div>

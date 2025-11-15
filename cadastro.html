@@ -10,11 +10,21 @@
     <header>
         <div class="container">
             <h1>ONG Patas com Futuro</h1>
-            <button class="menu-hamburguer" aria-label="Abrir ou fechar menu de navegação"></button>
+            
+            <div class="theme-switch-wrapper">
+                <span>Modo Escuro</span>    
+                <label class="theme-switch" for="checkbox-theme">
+                    <input type="checkbox" id="checkbox-theme" aria-label="Ativar ou desativar modo escuro" />
+                    <div class="slider round"></div>
+                </label>
+            </div>
+
+            <button class="menu-hamburguer" aria-label="Abrir ou fechar menu de navegação">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
+            
             <nav>
                 <ul>
                     <li><a href="index.html">Início</a></li>
@@ -27,14 +37,8 @@
 
     <main>
         <div class="container">
-            <div class="theme-switch-wrapper">
-        <label class="theme-switch" for="checkbox-theme">
-         <input type="checkbox" id="checkbox-theme" aria-label="Ativar ou desativar modo escuro" />
-            <div class="slider round"></div>
-        </label>
-    </div>
             <section id="formulario-voluntariado">
-                <div class="alert alert-sucesso">
+                <div class="alert alert-sucesso hidden" id="alert-sucesso">
                     <strong>Sucesso!</strong> Seu formulário foi enviado e será analisado por nossa equipe.
                 </div>
                 <h2>Formulário de Cadastro de Voluntário</h2>
@@ -77,7 +81,8 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 ONG Patas com Futuro. Todos os direitos reservados.</p>
+            <p>© 2025 ONG Patas com Futuro. Todos os direitos reservados.</p>
+            
             <section id="newsletter">
                 <h4>Assine nossa Newsletter</h4>
                 <p>Receba nossas histórias e novidades diretamente no seu e-mail.</p>
@@ -97,6 +102,7 @@
             </section>
         </div>
     </footer>
-<script src="js/script.min.js"></script>
+
+    <script src="js/script.min.js"></script>
 </body>
 </html>

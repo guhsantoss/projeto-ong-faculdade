@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     
-    // 1. SELEÇÃO DE ELEMENTOS FUNDAMENTAIS
+    // 1. SELEÇÃO DE ELEMENTOS GLOBAIS
     const mainContent = document.querySelector('main .container');
     const menuHamburguer = document.querySelector('.menu-hamburguer');
     const nav = document.querySelector('header nav');
@@ -10,12 +10,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // 2. CONTROLE DO MODO ESCURO
     // =============================================================
     if (themeSwitch) {
+        // Verifica se o usuário JÁ TEM uma preferência salva no localStorage
         const temaSalvo = localStorage.getItem('theme');
         if (temaSalvo === 'dark') {
             document.body.classList.add('dark-mode');
             themeSwitch.checked = true;
         }
 
+        // "Escuta" por cliques no interruptor
         themeSwitch.addEventListener('change', function() {
             if (this.checked) {
                 document.body.classList.add('dark-mode');
@@ -28,7 +30,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // =============================================================
-    // 3. FUNÇÕES DE ATIVAÇÃO E VALIDAÇÃO (REQUISITO 3)
+    // 3. CONTROLE DO MENU HAMBÚRGUER
+    // =============================================================
+    if (menuHamburguer && nav) {
+        menuHamburguer.addEventListener('click', () => {
+            nav.classList.toggle('menu-aberto');
+        });
+    }
+
+    // =============================================================
+    // 4. FUNÇÕES DE ATIVAÇÃO E VALIDAÇÃO (Requisito 3)
     // =============================================================
 
     function ativarMascaras() {
@@ -39,26 +50,23 @@ document.addEventListener('DOMContentLoaded', function() {
         // Lógica das máscaras
         if (inputCpf) {
             inputCpf.addEventListener('input', (e) => {
-                let value = e.target.value.replace(/\D/g, '');
-                value = value.replace(/(\d{3})(\d)/, '$1.$2');
-                value = value.replace(/(\d{3})(\d)/, '$1.$2');
-                value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-                e.target.value = value;
+                let v = e.target.value.replace(/\D/g, '');
+                v = v.replace(/(\d{3})(\d)/, '$1.$2'); v = v.replace(/(\d{3})(\d)/, '$1.$2'); v = v.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+                e.target.value = v;
             });
         }
         if (inputTel) {
             inputTel.addEventListener('input', (e) => {
-                let value = e.target.value.replace(/\D/g, '');
-                value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
-                value = value.replace(/(\d{5})(\d)/, '$1-$2');
-                e.target.value = value;
+                let v = e.target.value.replace(/\D/g, '');
+                v = v.replace(/^(\d{2})(\d)/, '($1) $2'); v = v.replace(/(\d{5})(\d)/, '$1-$2');
+                e.target.value = v;
             });
         }
         if (inputCep) {
             inputCep.addEventListener('input', (e) => {
-                let value = e.target.value.replace(/\D/g, '');
-                value = value.replace(/^(\d{5})(\d)/g, '$1-$2');
-                e.target.value = value;
+                let v = e.target.value.replace(/\D/g, '');
+                v = v.replace(/^(\d{5})(\d)/, '$1-$2');
+                e.target.value = v;
             });
         }
     }
@@ -66,27 +74,24 @@ document.addEventListener('DOMContentLoaded', function() {
     function ativarValidacaoFormulario() {
         const form = document.querySelector('#form-voluntario');
         const alertSucesso = document.querySelector('#alert-sucesso');
-        if (!form) return;
+        if (!form || !alertSucesso) return;
 
-        // Função auxiliar para criar e mostrar a mensagem de erro na tela.
-        function mostrarErro(inputElemento, mensagem) {
-            inputElemento.classList.add('erro'); 
+        function mostrarErro(inputEl, msg) {
+            inputEl.classList.add('erro'); 
             const divErro = document.createElement('div');
             divErro.className = 'mensagem-erro';
-            divErro.innerText = mensagem;
-            inputElemento.parentNode.appendChild(divErro);
+            divErro.innerText = msg;
+            inputEl.parentNode.appendChild(divErro);
         }
 
         form.addEventListener('submit', (event) => {
             event.preventDefault(); 
             let isValid = true; 
             
-            // 1. Limpa todas as mensagens de erro e classes de erro antigas.
-            form.querySelectorAll('.mensagem-erro').forEach(erro => erro.remove());
-            form.querySelectorAll('.erro').forEach(input => input.classList.remove('erro'));
+            form.querySelectorAll('.mensagem-erro').forEach(e => e.remove());
+            form.querySelectorAll('.erro').forEach(e => e.classList.remove('erro'));
             alertSucesso.style.display = 'none';
 
-            // 2. Validação de Nome e Email (Requisito de Consistência)
             const nome = form.querySelector('#nome');
             if (nome.value.trim().length < 3) {
                 isValid = false;
@@ -98,8 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 isValid = false;
                 mostrarErro(email, 'Por favor, insira um e-mail válido.');
             }
-
-            // 3. Sucesso
+            
             if (isValid) {
                 alertSucesso.style.display = 'block';
                 form.reset();
@@ -108,20 +112,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // =============================================================
-    // 4. MOTOR DA SPA
+    // 5. MOTOR DA SPA (REQUISITO 1)
     // =============================================================
 
     function carregarConteudo(href) {
         if (href.includes('projetos.html')) {
             mainContent.innerHTML = templateProjetos();
-            ativarMascaras(); // Garante que as máscaras funcionam se o usuário voltar para o cadastro
-            ativarValidacaoFormulario(); 
         } else if (href.includes('cadastro.html')) {
             mainContent.innerHTML = templateCadastro();
-            ativarMascaras();
-            ativarValidacaoFormulario(); 
+            // Ativa as funcionalidades com um pequeno delay (para garantir que o DOM foi renderizado)
+            setTimeout(() => {
+                ativarMascaras();
+                ativarValidacaoFormulario();
+            }, 10); 
         } else if (href.includes('index.html')) {
-            mainContent.innerHTML = templateHome();
+             mainContent.innerHTML = templateHome();
         }
     }
 
@@ -129,9 +134,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.querySelectorAll('header nav a');
     navLinks.forEach(link => {
         link.addEventListener('click', function(event) {
-            event.preventDefault();
+            event.preventDefault(); // Impede o recarregamento em TODOS os links
             const href = event.target.getAttribute('href');
-
+            
             if (nav.classList.contains('menu-aberto')) {
                 nav.classList.remove('menu-aberto');
             }
@@ -145,10 +150,10 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // =============================================================
-// SISTEMA DE TEMPLATES (REQUISITO 2)
+// 6. SISTEMA DE TEMPLATES (REQUISITO 2)
 // =============================================================
 
-const templateHome = function() {
+function templateHome() {
     return `
         <section id="inicio">
             <h2>Resgatando vidas, criando futuros.</h2>
@@ -157,9 +162,9 @@ const templateHome = function() {
         <hr>
         <section id="sobre-nos">
             <h2>Nossa História: Uma Jornada de Amor e Resgate</h2>
-            <p>A ONG Patas com Futuro nasceu em 2015 do sonho de um pequeno grupo de amigos que não podiam mais ignorar o sofrimento dos animais de rua em nossa cidade. Hoje, contamos com uma rede de voluntários e parceiros dedicados, mas a paixão que nos moveu no primeiro dia permanece a mesma: dar uma segunda chance a quem mais precisa.</p>
+            <p>A ONG Patas com Futuro nasceu em 2015 do sonho de um pequeno grupo de amigos que não podiam mais ignorar o sofrimento dos animais de rua em nossa cidade...</p>
             <figure>
-                <img src="imagens/fundacao-ong.jpg" alt="Foto antiga do primeiro grupo de voluntários com alguns cães resgatados." loading="lazy">
+                <img src="imagens/fundacao-ong.jpg" alt="Foto antiga do primeiro grupo de voluntários..." loading="lazy">
                 <figcaption>Nossos fundadores em 2015, no início de tudo.</figcaption>
             </figure>
         </section>
@@ -171,18 +176,18 @@ const templateHome = function() {
             <p><strong>Endereço:</strong> Rua dos Vira-Latas Felizes, 123, Cidade Animalia - SP</p>
         </section> 
     `;
-};
+}
 
-const templateProjetos = function() {
+function templateProjetos() {
     return `
         <section id="introducao-projetos">
             <h2>Conheça o Impacto do Seu Apoio</h2>
-            <p>Cada doação e cada hora de voluntariado se transformam em ações concretas que salvam vidas. Veja abaixo os principais pilares do nosso trabalho.</p>
+            <p>Cada doação e cada hora de voluntariado se transformam em ações concretas que salvam vidas...</p>
         </section>
         <hr>
         <section class="projeto-detalhe">
             <h3>Projeto Resgate e Reabilitação</h3>
-            <p>Nossas equipes atuam diariamente resgatando animais em situações de risco. Após o resgate, eles recebem cuidados veterinários completos e alimentação de qualidade.</p>
+            <p>Nossas equipes atuam diariamente resgatando animais em situações de risco...</p>
             <h4>Vídeo Institucional: O Dia a Dia do Resgate</h4>
             <div class="video-wrapper">
                 <div class="video-responsivo">
@@ -228,7 +233,7 @@ const templateProjetos = function() {
             <a href="cadastro.html" class="btn btn-primary">Seja um Voluntário</a>
         </section>
     `;
-};
+}
 
 function templateCadastro() {
     return `
