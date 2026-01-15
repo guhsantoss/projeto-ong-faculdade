@@ -1,6 +1,6 @@
 # 🚀 Projeto Front-End: Plataforma ONG Patas com Futuro
 
-Este repositório contém o projeto final das disciplinas de Experiência Prática 1, 2, 3 e 4, focado no desenvolvimento de uma plataforma web completa para uma ONG fictícia. O projeto demonstra a evolução de uma estrutura HTML semântica para uma Single Page Application (SPA) interativa, responsiva e acessível.
+Este repositório contém o projeto web responsivo desenvolvido para gestão e divulgação de ONGs. Foco em usabilidade e acessibilidade. O projeto demonstra a evolução de uma estrutura HTML semântica para uma Single Page Application (SPA) interativa, responsiva e acessível.
 
 ---
 
